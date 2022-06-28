@@ -220,10 +220,8 @@ class Data_barang extends CI_Controller
                 $row[] = $no;
                 $row[] = $i->kode_barang;
                 $row[] = $i->nama_barang;
-                if ($i->stok == 0)
+                if ($i->stok <= 5)
                     $row[] = "<div class='bg-danger'>{$i->stok}</div>";
-                elseif ($i->stok <= 5)
-                    $row[] = "<div class='bg-warning'>{$i->stok}</div>";
                 else
                     $row[] = $i->stok;
 

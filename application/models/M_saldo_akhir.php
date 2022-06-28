@@ -25,6 +25,10 @@ class M_saldo_akhir extends CI_Model
         return $this->db->get();
     }
 
+    function save($data = null) {
+        return $this->db->insert('tbl_saldoakhir', $data);
+        return $this->db->insert_id();
+    }
 
     private function _get_datatables_query() {
 

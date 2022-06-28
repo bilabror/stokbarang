@@ -10,6 +10,8 @@ $barang = $this->db->get('tbl_barang')->result();
 $isThereData = false;
 
 
+
+
 if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
     $yearFilter = $_GET['tahun'];
@@ -19,7 +21,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
     // query saldo akhir
     $this->db->select('*,(saldoakhir*harga_persediaan) as nilai_saldoakhir');
-    $this->db->from('vsaldoakhir');
+    $this->db->from('tbl_saldoakhir');
     $this->db->where('kode_barang', $kodeBarangFilter);
     $this->db->where('year(tgl_saldoakhir)', $lastYear);
     $this->db->order_by('tgl_saldoakhir', 'DESC');
@@ -109,8 +111,6 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
     if (count($finalData) > 1)
         $isThereData = true;
 
-} else {
-    // code...
 }
 
 
