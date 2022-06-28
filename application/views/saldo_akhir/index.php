@@ -4,6 +4,10 @@
     <div class="col-sm-12 col-md-10">
         <h4 class="mb-0"><i class="fa fa-cubes"></i> Saldo Akhir</h4>
     </div>
+
+    <div class="col-sm-12 col-md-2">
+        <a href="<?= site_url('tambah_saldo_akhir'); ?>" class="btn btn-success btn-sm btn-block">Tambah Saldo Akhir</a>
+    </div>
 </div>
 <hr class="mt-0" />
 <?php
@@ -27,6 +31,7 @@ if ($this->session->flashdata('error')) {
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Kode Barang</th>
+                <th scope="col">Nama Barang</th>
                 <th scope="col">Tgl Saldo Akhir</th>
                 <th scope="col">Saldo Akhir</th>
             </tr>

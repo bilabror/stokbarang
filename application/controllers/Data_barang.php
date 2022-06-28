@@ -3,8 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Data_barang extends CI_Controller
 {
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         //load library
         $this->load->library(['template', 'form_validation']);
@@ -17,8 +16,7 @@ class Data_barang extends CI_Controller
         header('Pragma: no-cache');
     }
 
-    public function index()
-    {
+    public function index() {
         //cek apakah user yang login adalah admin atau bukan
         //jika bukan maka alihkan ke dashboard
         $this->is_admin();
@@ -30,8 +28,7 @@ class Data_barang extends CI_Controller
         $this->template->kasir('data_barang/index', $data);
     }
 
-    public function tambah_data()
-    {
+    public function tambah_data() {
         //cek apakah user yang login adalah admin atau bukan
         //jika bukan maka alihkan ke dashboard
         $this->is_admin();
@@ -62,16 +59,6 @@ class Data_barang extends CI_Controller
             );
 
             $this->form_validation->set_rules(
-                'brand',
-                'Nama Brand',
-                'required|min_length[2]',
-                array(
-                    'required' => '{field} wajib diisi',
-                    'min_length' => '{field} minimal 2 karakter'
-                )
-            );
-
-            $this->form_validation->set_rules(
                 'harga',
                 'Harga Jual',
                 "required|regex_match[/^[0-9.]+$/]",
@@ -87,7 +74,6 @@ class Data_barang extends CI_Controller
                 $simpan = array(
                     'kode_barang' => $this->security->xss_clean($this->input->post('kode', TRUE)),
                     'nama_barang' => $this->security->xss_clean($this->input->post('nama_barang', TRUE)),
-                    'brand' => $this->security->xss_clean($this->input->post('brand', TRUE)),
                     'harga' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga', TRUE)))
                 );
 
@@ -109,8 +95,7 @@ class Data_barang extends CI_Controller
         $this->template->kasir('data_barang/form_tambah', $data);
     }
 
-    public function edit_data($kode_barang = '')
-    {
+    public function edit_data($kode_barang = '') {
 
         //cek apakah user yang login adalah admin atau bukan
         //jika bukan maka alihkan ke dashboard
@@ -166,15 +151,6 @@ class Data_barang extends CI_Controller
                 )
             );
 
-            $this->form_validation->set_rules(
-                'brand',
-                'Nama Brand',
-                'required|min_length[2]',
-                array(
-                    'required' => '{field} wajib diisi',
-                    'min_length' => '{field} minimal 2 karakter'
-                )
-            );
 
             $this->form_validation->set_rules(
                 'harga',
@@ -186,26 +162,13 @@ class Data_barang extends CI_Controller
                 )
             );
 
-            $this->form_validation->set_rules(
-                'status',
-                'Status',
-                "required|min_length[1]|max_length[1]|regex_match[/^[YN]+$/]",
-                array(
-                    'required' => '{field} wajib diisi',
-                    'min_length' => '{field} hanya boleh 1 karakter',
-                    'max_length' => '{field} hanya boleh 1 karakter',
-                    'regex_match' => 'Input {field} tidak valid'
-                )
-            );
 
             //jika validasi berhasil
             if ($this->form_validation->run() == TRUE) {
                 //masukkan data ke variable array
                 $update = array(
                     'nama_barang' => $this->security->xss_clean($this->input->post('nama_barang', TRUE)),
-                    'brand' => $this->security->xss_clean($this->input->post('brand', TRUE)),
-                    'harga' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga', TRUE))),
-                    'active' => $this->security->xss_clean($this->input->post('status', TRUE))
+                    'harga' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga', TRUE)))
                 );
 
                 //simpan ke database
@@ -227,8 +190,7 @@ class Data_barang extends CI_Controller
         $this->template->kasir('data_barang/form_edit', $data);
     }
 
-    public function stok()
-    {
+    public function stok() {
         //cek pegawai
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'pegawai') {
             redirect('dashboard');
@@ -241,8 +203,7 @@ class Data_barang extends CI_Controller
         $this->template->kasir('data_barang/stok', $data);
     }
 
-    public function ajax_barang()
-    {
+    public function ajax_barang() {
         $this->is_admin();
         //cek apakah request berupa ajax atau bukan, jika bukan maka redirect ke home
         if ($this->input->is_ajax_request()) {
@@ -259,10 +220,14 @@ class Data_barang extends CI_Controller
                 $row[] = $no;
                 $row[] = $i->kode_barang;
                 $row[] = $i->nama_barang;
-                $row[] = $i->brand;
-                $row[] = $i->stok;
+                if ($i->stok == 0)
+                    $row[] = "<div class='bg-danger'>{$i->stok}</div>";
+                elseif ($i->stok <= 5)
+                    $row[] = "<div class='bg-warning'>{$i->stok}</div>";
+                else
+                    $row[] = $i->stok;
+
                 $row[] = '<span class="float-left">Rp.</span><span class="float-right">' . number_format($i->harga, 0, ',', '.') . ',-</span>';
-                $row[] = ($i->active == 'Y') ? 'Aktif' : 'Tidak Aktif';
                 $row[] = '<a href="' . site_url('edit_barang/' . $i->kode_barang) . '" class="btn btn-warning btn-sm text-white">Edit</a>';
 
                 $data[] = $row;
@@ -281,8 +246,7 @@ class Data_barang extends CI_Controller
         }
     }
 
-    public function ajax_stok_barang()
-    {
+    public function ajax_stok_barang() {
         //cek pegawai
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'pegawai') {
             redirect('dashboard');
@@ -322,8 +286,7 @@ class Data_barang extends CI_Controller
         }
     }
 
-    private function is_admin()
-    {
+    private function is_admin() {
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'admin') {
             redirect('dashboard');
         }

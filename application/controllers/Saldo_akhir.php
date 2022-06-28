@@ -9,6 +9,7 @@ class Saldo_akhir extends CI_Controller
         $this->load->library(['template', 'form_validation']);
         //load model
         $this->load->model('m_saldo_akhir');
+        //$this->load->model('barang', 'm_barang');
 
         header('Last-Modified:' . gmdate('D, d M Y H:i:s') . 'GMT');
         header('Cache-Control: no-cache, must-revalidate, max-age=0');
@@ -30,6 +31,87 @@ class Saldo_akhir extends CI_Controller
     }
 
 
+    public function tambah_data() {
+        //cek apakah user yang login adalah admin atau bukan
+        //jika bukan maka alihkan ke dashboard
+        $this->is_admin();
+
+
+        if ($this->input->post('submit', TRUE) == 'submit') {
+            //set rules form validasi
+
+
+            $this->form_validation->set_rules(
+                'tanggal',
+                'Tanggal Saldo Akhir',
+                'required',
+                array(
+                    'required' => '{field} wajib diisi',
+                )
+            );
+
+            $this->form_validation->set_rules(
+                'nama_barang',
+                'Barang',
+                'required',
+                array(
+                    'required' => '{field} wajib diisi'
+                )
+            );
+
+
+            $this->form_validation->set_rules(
+                'saldo_akhir',
+                'Saldo Akhir',
+                "required|regex_match[/^[0-9.]+$/]",
+                array(
+                    'required' => '{field} wajib diisi',
+                    'regex_match' => '{field} hanya boleh angka'
+                )
+            );
+
+            $this->form_validation->set_rules(
+                'harga_persediaan',
+                'Harga Persediaan',
+                "required|regex_match[/^[0-9.]+$/]",
+                array(
+                    'required' => '{field} wajib diisi',
+                    'regex_match' => '{field} hanya boleh angka'
+                )
+            );
+
+            //jika data sudah valid maka lakukan proses penyimpanan
+            if ($this->form_validation->run() == TRUE) {
+                //masukkan data ke variable array
+                $tgl = date('Y-m-d', strtotime(str_replace('/', '-', $this->security->xss_clean($this->input->post('tanggal', TRUE)))));
+                $simpan = array(
+                    'kode_barang' => $this->security->xss_clean($this->input->post('nama_barang', TRUE)),
+                    'tgl_saldoakhir' => $tgl,
+                    'saldoakhir' => $this->security->xss_clean($this->input->post('saldo_akhir', TRUE)),
+                    'harga_persediaan' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga_persediaan', TRUE)))
+                );
+
+                //simpan ke database
+                $save = $this->m_saldo_akhir->save($simpan);
+
+                if ($save) {
+                    $this->session->set_flashdata('success', 'Data Saldo Akhir berhasil ditambah...');
+
+                    redirect('saldo_akhir');
+                }
+            }
+        }
+
+        $data = [
+            'title' => 'Tambah Saldo Akhir',
+            'barang' => $this->db->get('tbl_barang')->result()
+        ];
+
+
+        $this->template->kasir('saldo_akhir/form_tambah', $data);
+    }
+
+
     public function ajax_saldo_akhir() {
         $this->is_admin();
         //cek apakah request berupa ajax atau bukan, jika bukan maka redirect ke home
@@ -46,6 +128,7 @@ class Saldo_akhir extends CI_Controller
                 $row = array();
                 $row[] = $no;
                 $row[] = $i->kode_barang;
+                $row[] = $i->nama_barang;
                 $row[] = $i->tgl_saldoakhir;
                 $row[] = $i->saldoakhir;
 

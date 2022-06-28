@@ -5,8 +5,8 @@ class M_saldo_akhir extends CI_Model
 {
 
     var $table = 'tbl_saldoakhir';
-    var $column_order = array(null, 'kode_barang', 'tgl_saldoakhir', 'saldoakhir'); //set column field database untuk datatable order
-    var $column_search = array('kode_barang', 'tgl_saldoakhir', 'saldoakhir'); //set column field database untuk datatable search
+    var $column_order = array(null, 'kode_barang', 'nama_barang', 'tgl_saldoakhir', 'saldoakhir'); //set column field database untuk datatable order
+    var $column_search = array('kode_barang', 'nama_barang', 'tgl_saldoakhir', 'saldoakhir'); //set column field database untuk datatable search
     var $order = array('kode_barang' => 'asc'); // default order
 
     function __construct() {
@@ -14,7 +14,15 @@ class M_saldo_akhir extends CI_Model
     }
 
     function getAllData($table = null) {
-        return $this->db->get($table);
+        $this->db->select('tbl_saldoakhir.*,nama_barang');
+        $this->db->from($this->table);
+        $this->db->join('tbl_barang', 'tbl_barang.kode_barang=tbl_saldoakhir.kode_barang');
+        return $this->db->get();
+    }
+
+
+    function save($data = null) {
+        return $this->db->insert($this->table, $data);
     }
 
     function getData($table = null, $where = null) {
@@ -27,7 +35,9 @@ class M_saldo_akhir extends CI_Model
 
     private function _get_datatables_query() {
 
+        $this->db->select('tbl_saldoakhir.*,nama_barang');
         $this->db->from($this->table);
+        $this->db->join('tbl_barang', 'tbl_barang.kode_barang=tbl_saldoakhir.kode_barang');
 
         $i = 0;
 

@@ -160,6 +160,14 @@
     <script src="<?= base_url('assets/js/bootstrap-datetimepicker.js'); ?>"></script>
     <script src="<?= base_url('assets/js/js-cookie.js'); ?>"></script>
     <!-- Custom Javascript -->
+    <script>
+        $(document).ready(function() {
+            $('#table2').DataTable({
+                searching: false,
+                ordering: false
+            });
+        })
+    </script>
     <?php
     $arr_uri = array('stok_barang', 'barang', 'pegawai', 'supplier', 'data_pembelian', 'data_penjualan', 'saldo_akhir');
 
@@ -190,6 +198,8 @@
     ?>
     <script>
         $(document).ready(function() {
+
+
             $('#tables').DataTable({
                 "processing": true,
                 //Feature control the processing indicator.

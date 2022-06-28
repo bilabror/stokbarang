@@ -136,6 +136,7 @@ $route['kartu_stok'] = 'laporan/kartu_stok';
 //router Saldo Terakhir
 $route['saldo_akhir'] = 'Saldo_akhir/index';
 $route['ajax_saldo_akhir'] = 'saldo_akhir/ajax_saldo_akhir';
+$route['tambah_saldo_akhir'] = 'saldo_akhir/tambah_data';
 
 
 // router kartu stok barang
