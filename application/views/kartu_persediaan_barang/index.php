@@ -19,7 +19,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
     // query saldo akhir
     $this->db->select('*,(saldoakhir*harga_persediaan) as nilai_saldoakhir');
-    $this->db->from('tbl_saldoakhir');
+    $this->db->from('vsaldoakhir');
     $this->db->where('kode_barang', $kodeBarangFilter);
     $this->db->where('year(tgl_saldoakhir)', $lastYear);
     $this->db->order_by('tgl_saldoakhir', 'DESC');
