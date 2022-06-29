@@ -1,4 +1,11 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+
+$this->db->order_by('kode_barang', 'desc');
+$kodeBarang = $this->db->get('tbl_barang')->row()->kode_barang;
+$kodeBarang = "BRG".sprintf('%03d', intval(str_replace('BRG', '', $kodeBarang ?? 0)) + 1);
+
+
+?>
 
 <div class="row">
     <div class="col-sm-12 col-md-10">
@@ -12,7 +19,7 @@
     <div class="form-group row">
         <label for="KodeBarang" class="col-sm-3 col-form-label">Kode Barang</label>
         <div class="col-sm-9 col-md-6">
-            <input type="text" class="form-control form-control-sm<?= (form_error('kode')) ? 'is-invalid' : ''; ?>" id="KodeBarang" required autofocus name="kode" placeholder="Kode Barang" readonly="" value="<?= 'BRG' . time() ?>">
+            <input type="text" class="form-control form-control-sm<?= (form_error('kode')) ? 'is-invalid' : ''; ?>" id="KodeBarang" required autofocus name="kode" placeholder="Kode Barang" readonly="" value="<?= $kodeBarang ?>">
             <div class="invalid-feedback">
                 <?= form_error('kode', '<p class="error-message">', '</p>'); ?>
             </div>

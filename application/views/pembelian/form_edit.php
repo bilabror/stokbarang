@@ -8,7 +8,9 @@
 <hr class="mt-0" />
 <div id="message">
     <?php if ($this->session->flashdata('alert')) : ?>
-        <div class="alert alert-danger" role="alert"><?= $this->session->flashdata('alert'); ?></div>
+    <div class="alert alert-danger" role="alert">
+        <?= $this->session->flashdata('alert'); ?>
+    </div>
     <?php endif; ?>
 </div>
 <?= form_open(); ?>
@@ -17,7 +19,7 @@
     <div class="form-group row">
         <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Pembelian</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control form-control-sm <?= (form_error('tanggal')) ? 'is-invalid' : ''; ?>" name="tanggal" id="date-picker" value="<?= (set_value('tanggal')) ? set_value('tanggal') : date('d/m/Y', strtotime($fdata->tgl_pembelian)); ?>">
+            <input type="text" class="form-control form-control-sm<?= (form_error('tanggal')) ? 'is-invalid' : ''; ?>" name="tanggal" id="date-picker" value="<?= (set_value('tanggal')) ? set_value('tanggal') : date('d/m/Y', strtotime($fdata->tgl_pembelian)); ?>">
             <div class="invalid-feedback">
                 <?= form_error('tanggal', '<p class="error-message">', '</p>'); ?>
             </div>
@@ -26,15 +28,15 @@
     <div class="form-group row">
         <label for="supplier" class="col-sm-2 col-form-label">Supplier</label>
         <div class="col-sm-6">
-            <select class="custom-select custom-select-sm supplier <?= (form_error('supplier')) ? 'is-invalid' : ''; ?>" id="supplier" name="supplier">
+            <select class="custom-select custom-select-sm supplier<?= (form_error('supplier')) ? 'is-invalid' : ''; ?>" id="supplier" name="supplier">
                 <option value="" disabled selected>Pilih Supplier</option>
                 <?php
                 foreach ($supplier->result() as $s) :
-                    $sup = (set_value('supplier')) ? set_value('supplier') : $fdata->id_supplier;
+                $sup = (set_value('supplier')) ? set_value('supplier') : $fdata->id_supplier;
 
-                    $pilih = ($sup == $s->id_supplier) ? 'selected' : '';
+                $pilih = ($sup == $s->id_supplier) ? 'selected' : '';
 
-                    echo '<option value="' . $s->id_supplier . '" ' . $pilih . '>
+                echo '<option value="' . $s->id_supplier . '" ' . $pilih . '>
                         ' . $s->nama_supplier . '
                     </option>';
                 endforeach; ?>
@@ -50,9 +52,9 @@
             <select class="custom-select custom-select-sm barang-select" id="barangx">
                 <option value="" disabled selected>Pilih Barang</option>
                 <?php foreach ($data->result() as $d) : ?>
-                    <option value="<?= $d->kode_barang; ?>">
-                        <?= $d->nama_barang . ' ( ' . $d->brand . ' )'; ?>
-                    </option>
+                <option value="<?= $d->kode_barang; ?>">
+                    <?= $d->nama_barang; ?>
+                </option>
                 <?php endforeach; ?>
             </select>
         </div>

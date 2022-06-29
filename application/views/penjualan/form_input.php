@@ -8,7 +8,9 @@
 <hr class="mt-0" />
 <div id="message">
     <?php if ($this->session->flashdata('alert')) : ?>
-        <div class="alert alert-danger" role="alert"><?= $this->session->flashdata('alert'); ?></div>
+    <div class="alert alert-danger" role="alert">
+        <?= $this->session->flashdata('alert'); ?>
+    </div>
     <?php endif; ?>
 </div>
 <?= form_open(); ?>
@@ -16,7 +18,7 @@
     <div class="form-group row">
         <label for="tanggal" class="col-sm-2 col-form-label">Tanggal Penjualan</label>
         <div class="col-sm-3">
-            <input type="text" class="form-control form-control-sm <?= (form_error('tanggal')) ? 'is-invalid' : ''; ?>" name="tanggal" id="date-picker" value="<?= (set_value('tanggal')) ? set_value('tanggal') : date('d/m/Y'); ?>">
+            <input type="text" class="form-control form-control-sm<?= (form_error('tanggal')) ? 'is-invalid' : ''; ?>" name="tanggal" id="date-picker" value="<?= (set_value('tanggal')) ? set_value('tanggal') : date('d/m/Y'); ?>">
             <div class="invalid-feedback">
                 <?= form_error('tanggal', '<p class="error-message">', '</p>'); ?>
             </div>
@@ -25,7 +27,7 @@
     <div class="form-group row">
         <label for="pembeli" class="col-sm-2 col-form-label">Nama Pembeli</label>
         <div class="col-sm-6">
-            <input type="text" name="pembeli" id="pembeli" class="form-control form-control-sm <?= (form_error('pembeli')) ? 'is-invalid' : ''; ?>" placeholder="Nama Pembeli" value="<?= (set_value('pembeli')) ? set_value('pembeli') : ''; ?>">
+            <input type="text" name="pembeli" id="pembeli" class="form-control form-control-sm<?= (form_error('pembeli')) ? 'is-invalid' : ''; ?>" placeholder="Nama Pembeli" value="<?= (set_value('pembeli')) ? set_value('pembeli') : ''; ?>">
             <div class="invalid-feedback">
                 <?= form_error('pembeli', '<p class="error-message">', '</p>'); ?>
             </div>
@@ -37,9 +39,9 @@
             <select class="barang-select custom-select custom-select-sm pilih-barang" id="barang-penjualan">
                 <option value="" disabled selected>Pilih Barang</option>
                 <?php foreach ($data->result() as $d) : ?>
-                    <option value="<?= $d->kode_barang; ?>">
-                        <?= $d->nama_barang . ' ( ' . $d->brand . ' )'; ?>
-                    </option>
+                <option value="<?= $d->kode_barang; ?>">
+                    <?= $d->nama_barang; ?>
+                </option>
                 <?php endforeach; ?>
             </select>
         </div>
