@@ -38,11 +38,9 @@ class Data_barang extends CI_Controller
             $this->form_validation->set_rules(
                 'kode',
                 'Kode Barang',
-                'required|min_length[3]|max_length[6]|is_unique[tbl_barang.kode_barang]',
+                'required|is_unique[tbl_barang.kode_barang]',
                 array(
                     'required' => '{field} wajib diisi',
-                    'min_length' => '{field} minimal 3 karakter',
-                    'max_length' => '{field} maksimal 6 karakter',
                     'is_unique' => 'Kode sudah terdaftar'
                 )
             );
@@ -123,9 +121,9 @@ class Data_barang extends CI_Controller
             //cek apakah user merubah kode barang atau tidak
             $b = $barang->row();
             if ($b->kode_barang == $this->security->xss_clean($this->input->post('ID', TRUE))) {
-                $rules_kode_barang = 'required|min_length[3]|max_length[6]';
+                $rules_kode_barang = 'required';
             } else {
-                $rules_kode_barang = 'required|min_length[3]|max_length[6]|is_unique[tbl_barang.kode_barang]';
+                $rules_kode_barang = 'required|is_unique[tbl_barang.kode_barang]';
             }
             //set rules form validasi
             $this->form_validation->set_rules(
@@ -134,8 +132,6 @@ class Data_barang extends CI_Controller
                 $rules_kode_barang,
                 array(
                     'required' => '{field} wajib diisi',
-                    'min_length' => '{field} minimal 3 karakter',
-                    'max_length' => '{field} maksimal 6 karakter',
                     'is_unique' => 'Kode sudah terdaftar'
                 )
             );

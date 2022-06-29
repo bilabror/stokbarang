@@ -40,6 +40,18 @@ class Kartu_stok_barang extends CI_Controller
 
     public function export_data() {
 
+        if (!isset($_GET['kode_barang']) || !isset($_GET['tahun'])) {
+            $url = site_url('kartu_stok_barang');
+            header("location: {$url}");
+            exit();
+        }
+
+        if (!isset($_GET['kode_barang']) || !isset($_GET['tahun'])) {
+            $url = site_url('kartu_stok_barang');
+            header("location: {$url}");
+            exit();
+        }
+
         $finalData = [];
         $isThereData = false;
         $yearFilter = $_GET['tahun'];

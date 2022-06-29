@@ -42,7 +42,7 @@
     <div class="form-group row">
         <div class="col-sm-9 offset-md-3">
             <button type="submit" name="submit" value="submit" class="btn btn-primary btn-sm">Tambah Data</button>
-            <button type="button" class="btn btn-light btn-sm" onclick="window.history.back()">Kembali</button>
+            <a href="<?=site_url('barang') ?>" class="btn  btn-light btn-sm">Kembali</a>
         </div>
     </div>
 </div>
