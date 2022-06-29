@@ -112,6 +112,42 @@ class Saldo_akhir extends CI_Controller
     }
 
 
+
+    public function hapus_data() {
+        //cek login
+        $this->is_admin();
+        //validasi request ajax
+        if ($this->input->is_ajax_request()) {
+            //validasi
+            $this->form_validation->set_rules(
+                'id',
+                'ID Saldo Akhir',
+                "required",
+                array(
+                    'required' => '{field} tidak valid'
+                )
+            );
+
+            if ($this->form_validation->run() == TRUE) {
+                //tangkap rowid
+                $kode_barang = explode(".", $this->security->xss_clean($this->input->post('id', TRUE)))[0];
+                $tgl_saldoakhir = explode(".", $this->security->xss_clean($this->input->post('id', TRUE)))[1];
+
+                $hapus = $this->m_saldo_akhir->delete(['kode_barang' => $kode_barang, 'tgl_saldoakhir' => $tgl_saldoakhir]);
+
+                if ($hapus) {
+                    echo json_encode(['message' => 'success']);
+                } else {
+                    echo json_encode(['message' => 'failed']);
+                }
+            } else {
+                echo json_encode(['message' => 'failed']);
+            }
+        } else {
+            redirect('dashboard');
+        }
+    }
+
     public function ajax_saldo_akhir() {
         $this->is_admin();
         //cek apakah request berupa ajax atau bukan, jika bukan maka redirect ke home
@@ -131,6 +167,7 @@ class Saldo_akhir extends CI_Controller
                 $row[] = $i->nama_barang;
                 $row[] = $i->tgl_saldoakhir;
                 $row[] = $i->saldoakhir;
+                $row[] = '<button type="button" class="btn btn-danger btn-sm"onclick="hapus_saldoakhir(\'' . $i->kode_barang.'.'. $i->tgl_saldoakhir . '\')">Hapus</button>';
 
                 $data[] = $row;
             }

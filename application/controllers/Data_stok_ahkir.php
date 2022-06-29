@@ -3,8 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Data_stok_ahkir extends CI_Controller
 {
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         //load library
         $this->load->library(['template', 'form_validation']);
@@ -17,8 +16,7 @@ class Data_stok_ahkir extends CI_Controller
         header('Pragma: no-cache');
     }
 
-    public function index()
-    {
+    public function index() {
         //cek apakah user yang login adalah admin atau bukan
         //jika bukan maka alihkan ke dashboard
         $this->is_admin();
@@ -30,8 +28,7 @@ class Data_stok_ahkir extends CI_Controller
         $this->template->kasir('data_stok_ahkir/index', $data);
     }
 
-    public function stok()
-    {
+    public function stok() {
         //cek pegawai
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'pegawai') {
             redirect('dashboard');
@@ -44,8 +41,7 @@ class Data_stok_ahkir extends CI_Controller
         $this->template->kasir('data_barang/stok', $data);
     }
 
-    public function ajax_barang()
-    {
+    public function ajax_barang() {
         $this->is_admin();
         //cek apakah request berupa ajax atau bukan, jika bukan maka redirect ke home
         if ($this->input->is_ajax_request()) {
@@ -84,8 +80,7 @@ class Data_stok_ahkir extends CI_Controller
         }
     }
 
-    public function ajax_stok_barang()
-    {
+    public function ajax_stok_barang() {
         //cek pegawai
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'pegawai') {
             redirect('dashboard');
@@ -105,7 +100,6 @@ class Data_stok_ahkir extends CI_Controller
                 $row[] = $no;
                 $row[] = $i->kode_barang;
                 $row[] = $i->nama_barang;
-                $row[] = $i->brand;
                 $row[] = $i->stok;
                 $row[] = '<span class="float-left">Rp.</span><span class="float-right">' . number_format($i->harga, 0, ',', '.') . ',-</span>';
 
@@ -125,8 +119,7 @@ class Data_stok_ahkir extends CI_Controller
         }
     }
 
-    private function is_admin()
-    {
+    private function is_admin() {
         if (!$this->session->userdata('level') || $this->session->userdata('level') != 'admin') {
             redirect('dashboard');
         }

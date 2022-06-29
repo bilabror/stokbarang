@@ -30,6 +30,14 @@ class M_saldo_akhir extends CI_Model
         return $this->db->insert_id();
     }
 
+
+    function delete($where = null) {
+        $this->db->where($where);
+        $this->db->delete('tbl_saldoakhir');
+
+        return $this->db->affected_rows();
+    }
+
     private function _get_datatables_query() {
 
         $this->db->from($this->table);

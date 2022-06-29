@@ -832,6 +832,66 @@ function hapus_supplier(id) {
         });
     });
 }
+
+
+
+function hapus_saldoakhir(id) {
+    alert(id)
+    swal({
+        title: 'Apakah anda yakin akan menghapus data ini ?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Ya, Hapus!',
+        closeOnConfirm: false
+    }, function() {
+        var csrf_token = Cookies.get('csrf_cookie');
+        var tabel = $('#tables').DataTable();
+
+        $.ajax({
+            url: "<?= site_url('hapus_saldoakhir'); ?>",
+            method: "POST",
+            data: {
+                id: id,
+                csrf_token: csrf_token
+            },
+            success: function(obj) {
+
+                var a = $.parseJSON(obj);
+
+                if (a.message == 'success') {
+                    swal({
+                        title: "Success!",
+                        text: "Data saldo akhir berhasil dihapus",
+                        type: "success",
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 2000
+                    }, function() {
+                        swal.close();
+
+                        $('#tables').each(function() {
+                            dt = $(this).DataTable();
+                            dt.ajax.reload();
+                        });
+                    });
+                } else {
+                    swal({
+                        title: "Error!",
+                        text: "Data saldo akhir gagal dihapus",
+                        type: "error",
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timer: 2000
+                    }, function() {
+                        swal.close();
+                    });
+                }
+
+            }
+        });
+    });
+}
 </script>
 </body>
 
