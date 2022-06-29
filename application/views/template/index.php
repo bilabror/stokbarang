@@ -1,5 +1,3 @@
-<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -524,8 +522,8 @@ $('.pilih-barang').change(function() {
 
 function tambah_pembelian() {
     var id = $('#barang-penjualan').val();
-    var sisa = $('#sisa').val();
-    var qty = $('#jumlahx').val();
+    var sisa = parseInt($('#sisa').val());
+    var qty = parseInt($('#jumlahx').val());
     var csrf_token = Cookies.get('csrf_cookie');
     $('#barang-penjualan').addClass('pilih-barang');
 
