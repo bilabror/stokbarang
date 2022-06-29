@@ -9,9 +9,6 @@ $finalData = [];
 $barang = $this->db->get('tbl_barang')->result();
 $isThereData = false;
 
-
-
-
 if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
     $yearFilter = $_GET['tahun'];
@@ -166,12 +163,12 @@ if ($this->session->flashdata('alert')) {
         </form>
     </div>
     <div class="col-md-2 col-sm-12 mb-2">
-        <a href="" class="btn btn-success btn-block btn-sm" target="_blank">
+        <a href="<?=site_url("kartu_persediaan_barang/report?tahun={$yearFilter}&kode_barang={$kodeBarangFilter}") ?>" class="btn btn-danger btn-block btn-sm" target="_blank">
             <i class="fa fa-print"></i> Cetak
         </a>
     </div>
     <div class="col-md-2 col-sm-12 mb-2">
-        <a href="" class="btn btn-success btn-block btn-sm" target="_blank">
+        <a href="<?=site_url("kartu_persediaan_barang/export?tahun={$yearFilter}&kode_barang={$kodeBarangFilter}") ?>" class="btn btn-success btn-block btn-sm" target="_blank">
             <i class="fa fa-print"></i> Export
         </a>
     </div>
@@ -201,7 +198,6 @@ if ($this->session->flashdata('alert')) {
         <tbody>
 
             <?php if ($isThereData): ?>
-
             <?php foreach ($finalData as $value): ?>
             <tr>
                 <td><?=$value['date'] ?></td>
@@ -221,6 +217,7 @@ if ($this->session->flashdata('alert')) {
                 <td colspan="10"><center>Data Tidak ditemukan</center></td>
             </tr>
             <?php endif; ?>
+
         </tbody>
     </table>
 </div>

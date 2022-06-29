@@ -220,7 +220,7 @@ class Data_barang extends CI_Controller
                 $row[] = $no;
                 $row[] = $i->kode_barang;
                 $row[] = $i->nama_barang;
-                if ($i->stok <= 5)
+                if ($i->stok < 5)
                     $row[] = "<div class='bg-danger'>{$i->stok}</div>";
                 else
                     $row[] = $i->stok;
@@ -264,8 +264,10 @@ class Data_barang extends CI_Controller
                 $row[] = $no;
                 $row[] = $i->kode_barang;
                 $row[] = $i->nama_barang;
-                $row[] = $i->brand;
-                $row[] = $i->stok;
+                if ($i->stok < 5)
+                    $row[] = "<div class='bg-danger'>{$i->stok}</div>";
+                else
+                    $row[] = $i->stok;
                 $row[] = '<span class="float-left">Rp.</span><span class="float-right">' . number_format($i->harga, 0, ',', '.') . ',-</span>';
 
                 $data[] = $row;

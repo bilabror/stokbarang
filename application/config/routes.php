@@ -141,9 +141,13 @@ $route['tambah_saldo_akhir'] = 'saldo_akhir/tambah_data';
 
 // router kartu stok barang
 $route['kartu_stok_barang'] = 'kartu_stok_barang/index';
+$route['kartu_stok_barang/report'] = 'kartu_stok_barang/report';
+$route['kartu_stok_barang/export'] = 'kartu_stok_barang/export_data';
 
 // router kartu persediaan barang
 $route['kartu_persediaan_barang'] = 'kartu_persediaan_barang/index';
+$route['kartu_persediaan_barang/report'] = 'kartu_persediaan_barang/report';
+$route['kartu_persediaan_barang/export'] = 'kartu_persediaan_barang/export_data';
 
 
 $route['404_override'] = '';
