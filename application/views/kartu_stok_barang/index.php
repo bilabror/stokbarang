@@ -25,7 +25,6 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
     $saldoakhir = $this->db->get()->row();
 
     // query pembelian
-    //$this->db->select('kode_barang,detail.harga as harga_beli,tgl_pembelian as date,SUM(qty) as unit_beli, (SUM(qty) * detail.harga) as nilai_beli');
     $this->db->select('kode_barang,detail.id_pembelian,SUM(qty) as stok_in,(SUM(qty) * detail.harga) as cash_in,tgl_pembelian as date');
     $this->db->from('tbl_detail_pembelian detail');
     $this->db->join('tbl_pembelian beli', 'detail.id_pembelian=beli.id_pembelian');
@@ -37,8 +36,8 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
     $pembelian = $this->db->get()->result();
 
 
+
     // query penjualan
-    //$this->db->select('kode_barang,detail.harga as harga_jual,tgl_penjualan as date,SUM(qty) as unit_jual, (SUM(qty) * detail.harga) as nilai_jual');
     $this->db->select('kode_barang,detail.id_penjualan,SUM(qty) as stok_out,(SUM(qty)*detail.harga) as cash_out,tgl_penjualan as date');
     $this->db->from('tbl_detail_penjualan detail');
     $this->db->join('tbl_penjualan jual', 'detail.id_penjualan=jual.id_penjualan');
@@ -69,6 +68,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
     ksort($merge);
 
 
+
     // change key to index key
     $merge2 = [];
     foreach ($merge as $value) $merge2[] = $value;
@@ -96,7 +96,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
     }
 
 
-    if (count($finalData) > 1)
+    if (count($finalData) > 0)
         $isThereData = true;
 
 }
@@ -168,7 +168,7 @@ if ($this->session->flashdata('alert')) {
             <th scope="col" class="text-center">IN</th>
             <th scope="col" class="text-center">OUT</th>
             <!-- <th scope="col">Cash In</th>
-                                                <th scope="col">Cash Out</th>-->
+                                                                                                                                                <th scope="col">Cash Out</th>-->
             <th scope="col">Stok Akhir</th>
         </tr>
     </thead>
@@ -183,7 +183,7 @@ if ($this->session->flashdata('alert')) {
             <td><?=$value['in'] ?></td>
             <td><?=$value['out'] ?></td>
             <!--<td><?=$value['cash_in'] ?></td>
-                                                <td><?=$value['cash_out'] ?></td>-->
+                                                                                                                                                <td><?=$value['cash_out'] ?></td>-->
             <td><?=$value['balance'] ?></td>
         </tr>
         <?php endforeach; ?>
