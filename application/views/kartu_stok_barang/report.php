@@ -183,9 +183,9 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                             <th scope="col">Stok awal</th>
                             <th scope="col" class="text-center">IN</th>
                             <th scope="col" class="text-center">OUT</th>
-                            <th scope="col">Cash In</th>
-                            <th scope="col">Cash Out</th>
-                            <th scope="col">Balance</th>
+                            <!--<th scope="col">Cash In</th>
+                                                        <th scope="col">Cash Out</th>-->
+                            <th scope="col">Stok Akhir</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -198,14 +198,14 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                             <td><?=$value['stok_awal'] ?></td>
                             <td><?=$value['in'] ?></td>
                             <td><?=$value['out'] ?></td>
-                            <td><?=$value['cash_in'] ?></td>
-                            <td><?=$value['cash_out'] ?></td>
+                            <!--<td><?=$value['cash_in'] ?></td>
+                                                        <td><?=$value['cash_out'] ?></td>-->
                             <td><?=$value['balance'] ?></td>
                         </tr>
                         <?php endforeach; ?>
                         <?php else : ?>
                         <tr>
-                            <td colspan="9"><center>Data Tidak ditemukan</center></td>
+                            <td colspan="7"><center>Data Tidak ditemukan</center></td>
                         </tr>
                         <?php endif; ?>
                     </tbody>

@@ -1,14 +1,15 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 
 <div class="row">
-    <div class="col-sm-12 col-md-10">
+    <div class="col-sm-12 col-md-9">
         <h4 class="mb-0"><i class="fa fa-cubes"></i> Saldo Akhir</h4>
     </div>
-
-    <div class="col-sm-12 col-md-2">
+    <div class="col-sm-12 col-md-3">
         <a href="<?= site_url('tambah_saldo_akhir'); ?>" class="btn btn-success btn-sm btn-block">Tambah Saldo Akhir</a>
     </div>
 </div>
+
+
 <hr class="mt-0" />
 <?php
 //tampilkan pesan success

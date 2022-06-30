@@ -202,14 +202,14 @@ if ($this->session->flashdata('alert')) {
             <tr>
                 <td><?=$value['date'] ?></td>
                 <td><?=$value['unit_beli'] ?></td>
-                <td><?=$value['harga_beli'] ?></td>
-                <td><?=$value['nilai_beli'] ?></td>
+                <td><?= rupiah($value['harga_beli']) ?></td>
+                <td><?= rupiah($value['nilai_beli']) ?></td>
                 <td><?=$value['unit_jual'] ?></td>
-                <td><?=$value['harga_jual'] ?></td>
-                <td><?=$value['nilai_jual'] ?></td>
+                <td><?= rupiah($value['harga_jual']) ?></td>
+                <td><?= rupiah($value['nilai_jual']) ?></td>
                 <td><?=$value['unit_saldo'] ?></td>
-                <td><?=$value['harga_saldo'] ?></td>
-                <td><?=$value['nilai_saldo'] ?></td>
+                <td><?= rupiah($value['harga_saldo']) ?></td>
+                <td><?= rupiah($value['nilai_saldo']) ?></td>
             </tr>
             <?php endforeach; ?>
             <?php else : ?>

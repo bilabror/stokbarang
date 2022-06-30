@@ -48,11 +48,12 @@ class Data_barang extends CI_Controller
             $this->form_validation->set_rules(
                 'nama_barang',
                 'Nama Barang',
-                'required|min_length[3]|max_length[255]',
+                'required|min_length[3]|max_length[255]||is_unique[tbl_barang.nama_barang]',
                 array(
                     'required' => '{field} wajib diisi',
                     'min_length' => '{field} minimal 3 karakter',
-                    'max_length' => '{field} maksimal 255 karakter'
+                    'max_length' => '{field} maksimal 255 karakter',
+                    'is_unique' => 'Nama barang telah digunakan'
                 )
             );
 
@@ -68,20 +69,25 @@ class Data_barang extends CI_Controller
 
             //jika data sudah valid maka lakukan proses penyimpanan
             if ($this->form_validation->run() == TRUE) {
-                //masukkan data ke variable array
-                $simpan = array(
-                    'kode_barang' => $this->security->xss_clean($this->input->post('kode', TRUE)),
-                    'nama_barang' => $this->security->xss_clean($this->input->post('nama_barang', TRUE)),
-                    'harga' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga', TRUE)))
-                );
+                try {
+                    //masukkan data ke variable array
+                    $simpan = array(
+                        'kode_barang' => $this->security->xss_clean($this->input->post('kode', TRUE)),
+                        'nama_barang' => $this->security->xss_clean($this->input->post('nama_barang', TRUE)),
+                        'harga' => str_replace('.', '', $this->security->xss_clean($this->input->post('harga', TRUE)))
+                    );
 
-                //simpan ke database
-                $save = $this->m_barang->save('tbl_barang', $simpan);
+                    //simpan ke database
+                    $save = $this->m_barang->save('tbl_barang', $simpan);
 
-                if ($save) {
-                    $this->session->set_flashdata('success', 'Data Barang berhasil ditambah...');
+                    if ($save) {
+                        $this->session->set_flashdata('success', 'Data Barang berhasil ditambah...');
 
-                    redirect('barang');
+                        redirect('barang');
+                    }
+                } catch (Exception $e) {
+                    echo 'error';
+
                 }
             }
         }

@@ -145,9 +145,7 @@ class Kartu_stok_barang extends CI_Controller
         ->setCellValue('D1', 'STOK AWAL')
         ->setCellValue('E1', 'IN')
         ->setCellValue('F1', 'OUT')
-        ->setCellValue('G1', 'CASH IN')
-        ->setCellValue('H1', 'CASH OUT')
-        ->setCellValue('I1', 'BALANCE');
+        ->setCellValue('G1', 'STOK AKHIR');
         //Tanggal	ID Invoice	Stok awal	IN	OUT	Cash In	Cash Out	Balance
         $kolom = 2;
         $nomor = 1;
@@ -160,9 +158,7 @@ class Kartu_stok_barang extends CI_Controller
             ->setCellValue('D' . $kolom, $item['stok_awal'])
             ->setCellValue('E' . $kolom, $item['in'])
             ->setCellValue('F' . $kolom, $item['out'])
-            ->setCellValue('G' . $kolom, $item['cash_in'])
-            ->setCellValue('H' . $kolom, $item['cash_out'])
-            ->setCellValue('I' . $kolom, $item['balance']);
+            ->setCellValue('G' . $kolom, $item['balance']);
 
             $kolom++;
             $nomor++;
