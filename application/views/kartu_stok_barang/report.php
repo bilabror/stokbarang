@@ -130,13 +130,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
             margin-bottom: 75px;
         }
 
-        p.alamat {
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        h4.a {
+        h4.a,h2.a,h5.a {
             font-family: Tahoma, sans-serif;
             font-weight: bold;
             text-align: center;
@@ -144,13 +138,6 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
             padding: 0;
         }
 
-        h2.a {
-            font-family: Tahoma, sans-serif;
-            font-weight: bold;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
 
         table.table-pinjam > tbody > tr > td {
             padding: 0 !important;
@@ -172,7 +159,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                 <h2 class="a">LAPORAN STOK BARANG</h2>
                 <h4 class="a">KOPERASI KONI SALATIGA</h4>
                 <p class="alamat">
-                    Jl. Veteran No.41 Kota Salatiga
+                    <center>Jl. Veteran No.41 Kota Salatiga</center>
                 </p>
             </div>
         </div>
@@ -227,18 +214,27 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
         </div>
         <div class="row pt-4">
             <div class="col-md-6">
-
-            </div>
-            <div class="col-md-6 text-right">
-                <p>
-                    Salatiga, <?= tgl_indo(date('Y-m-d')) ?>
+                <p class="text-white">
+                    .
                 </p>
                 <p class="ex1">
-                    Penanggung jawab KOPERASI
+                    Penanggung jawab Koperasi
                 </p>
-                Nama Penanggung Jawab</br>
-            NIP. 1970051519954401</br>
+                <div class="d-inline-block" style="width:200px;border-bottom:1px solid black;"></div>
+            </br>
+            <b>Manager Koperasi</b></br>
     </div>
+    <div class="col-md-6 text-right">
+        <p>
+            Salatiga, <?= tgl_indo(date('Y-m-d')) ?>
+        </p>
+        <p class="ex1">
+            Mengetahui
+        </p>
+        <div class="d-inline-block" style="width:200px;border-bottom:1px solid black;"></div>
+    </br>
+    <b>Ketua Koni Kota Salatiga</b></br>
+</div>
 </div>
 
 
@@ -247,7 +243,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
 <script>
 window.print();
-window.onafterprint = window.close;
+//window.onafterprint = window.close;
 </script>
 
 
