@@ -48,7 +48,7 @@ class Data_barang extends CI_Controller
             $this->form_validation->set_rules(
                 'nama_barang',
                 'Nama Barang',
-                'required|min_length[3]|max_length[255]||is_unique[tbl_barang.nama_barang]',
+                'required|min_length[3]|max_length[255]|is_unique[tbl_barang.nama_barang]',
                 array(
                     'required' => '{field} wajib diisi',
                     'min_length' => '{field} minimal 3 karakter',
