@@ -157,9 +157,10 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
             </div>
             <div class="col-md-11">
                 <h2 class="a">LAPORAN STOK BARANG</h2>
-                <h4 class="a">KOPERASI KONI SALATIGA</h4>
+                <h4 class="a">KOPERASI PRESTASI KONI SALATIGA</h4>
                 <p class="alamat">
-                    <center>Jl. Veteran No.41 Kota Salatiga</center>
+                    <center>Jl. Veteran No.41, RT 02/ RW 01, Gendongan, Kec.Tingkir, Kota Salatiga, Jawa Tengah 50743</center>
+                    <center> Contact Person : (0298)3434258</center>
                 </p>
             </div>
         </div>
@@ -184,7 +185,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                             <th scope="col" class="text-center">IN</th>
                             <th scope="col" class="text-center">OUT</th>
                             <!--<th scope="col">Cash In</th>
-                                                                                                                                                                                                                                                                                                                                                <th scope="col">Cash Out</th>-->
+                                                                                    <th scope="col">Cash Out</th>-->
                             <th scope="col">Stok Akhir</th>
                         </tr>
                     </thead>
@@ -199,7 +200,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                             <td><?=$value['in'] ?></td>
                             <td><?=$value['out'] ?></td>
                             <!--<td><?=$value['cash_in'] ?></td>
-                                                                                                                                                                                                                                                                                                                                                <td><?=$value['cash_out'] ?></td>-->
+                                                                                    <td><?=$value['cash_out'] ?></td>-->
                             <td><?=$value['balance'] ?></td>
                         </tr>
                         <?php endforeach; ?>
@@ -222,8 +223,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
                 </p>
                 <div class="d-inline-block" style="width:200px;border-bottom:1px solid black;"></div>
             </br>
-            <b>Ketua Koperasi Prestasi
-                KONI Salatiga</b></br>
+            <b>Ketua Koperasi Prestasi KONI Salatiga</b></br>
     </div>
     <div class="col-md-6 text-right">
         <p>
@@ -234,7 +234,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
         </p>
         <div class="d-inline-block" style="width:200px;border-bottom:1px solid black;"></div>
     </br>
-    <b>Admin Koperasi Prestasi KONI Salatiga</b></br>
+    <b>Admin Koperasi Prestasi KONI Kota Salatiga</b></br>
 </div>
 </div>
 
@@ -244,7 +244,7 @@ if (isset($_GET['kode_barang']) && isset($_GET['tahun'])) {
 
 <script>
 window.print();
-window.onafterprint = window.close;
+//window.onafterprint = window.close;
 </script>
 
 
