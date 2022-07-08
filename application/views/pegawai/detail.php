@@ -14,14 +14,30 @@
         <div class="col-md-8 offset-md-1">
             <div class="card-body pt-1">
                 <h5 class="card-title mb-0"><?= $data->fullname; ?></h5>
-                <p class="card-text text-muted mb-2"><?= '@' . $data->username; ?></p>
-                <p class="card-text mb-0"><b>Nomor HP :</b></p>
-                <p class="card-text text-mute"><?= ($data->hp != '') ? $data->hp : '-'; ?></p>
-                <p class="card-text mb-0"><b>Alamat :</b></p>
-                <p class="card-text text-muted"><?= ($data->alamat != '') ? $data->alamat : '-'; ?></p>
-                <p class="card-text mb-0"><b>Status Pegawai :</b></p>
-                <p class="card-text text-muted"><?= ($data->status == 'Y') ? 'Pegawai Aktif' : 'Pegawai Tidak Aktif'; ?></p>
-                <p class="card-text mb-0"><b>Terakhir Login :</b></p>
+                <p class="card-text text-muted mb-2">
+                    <?= '@' . $data->username; ?>
+                </p>
+                <p class="card-text mb-0">
+                    <b>Nomor HP :</b>
+                </p>
+                <p class="card-text text-mute">
+                    <?= ($data->hp != '') ? $data->hp : '-'; ?>
+                </p>
+                <p class="card-text mb-0">
+                    <b>Alamat :</b>
+                </p>
+                <p class="card-text text-muted">
+                    <?= ($data->alamat != '') ? $data->alamat : '-'; ?>
+                </p>
+                <p class="card-text mb-0">
+                    <b>Status Pegawai :</b>
+                </p>
+                <p class="card-text text-muted">
+                    <?= ($data->active == 'Y') ? 'Pegawai Aktif' : 'Pegawai Tidak Aktif'; ?>
+                </p>
+                <p class="card-text mb-0">
+                    <b>Terakhir Login :</b>
+                </p>
                 <p class="card-text text-muted mb-0">
                     <?= ($data->last_login != '') ? date('d/m/Y - H:i:s', strtotime($data->last_login)) : '-'; ?>
                 </p>
